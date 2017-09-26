@@ -34,6 +34,7 @@ ext {
 
     /* Testing */
     junitVersion = '4.12'
+    jaxbVersion = '2.3.0'
     jacocoVersion = '0.7.9'
 
     /* OSGi */
@@ -55,6 +56,8 @@ dependencies {
     api group: 'org.apache.camel', name: 'camel-core', version: camelVersion
 
     testImplementation group: 'junit', name: 'junit', version: junitVersion
+    testImplementation group: 'org.apache.camel', name: 'camel-test', version: camelVersion
+    testImplementation group: 'javax.xml.bind', name: 'jaxb-api', version: jaxbVersion
 
     buildToolsConfig 'org.trellisldp:trellis-build-tools:0.2.0'
 }
