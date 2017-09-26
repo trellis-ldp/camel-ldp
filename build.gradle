@@ -101,10 +101,10 @@ task javadocJar(type: Jar) {
 artifacts {
     archives javadocJar
     archives sourceJar
-    archives (file('build/resources/main/features.xml')) {
-        classifier 'features'
-        type 'xml'
-    }
+    //archives (file('build/resources/main/features.xml')) {
+        //classifier 'features'
+        //type 'xml'
+    //}
 }
 
 jacoco {
