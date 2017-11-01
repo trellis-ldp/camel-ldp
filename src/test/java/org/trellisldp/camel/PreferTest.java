@@ -13,7 +13,6 @@
  */
 package org.trellisldp.camel;
 
-import static java.util.Optional.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -32,12 +31,12 @@ public class PreferTest {
     @Test
     public void testPrefer1() {
         final Prefer prefer = Prefer.valueOf("return=representation; include=\"http://example.org/test\"");
-        assertEquals(of("representation"), prefer.getPreference());
+        assertEquals("representation", prefer.getPreference());
         assertEquals(1L, prefer.getInclude().size());
         assertTrue(prefer.getInclude().contains("http://example.org/test"));
         assertTrue(prefer.getOmit().isEmpty());
-        assertFalse(prefer.getHandling().isPresent());
-        assertFalse(prefer.getWait().isPresent());
+        assertNull(prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -45,12 +44,12 @@ public class PreferTest {
     @Test
     public void testPrefer1b() {
         final Prefer prefer = Prefer.ofInclude("http://example.org/test");
-        assertEquals(of("representation"), prefer.getPreference());
+        assertEquals("representation", prefer.getPreference());
         assertEquals(1L, prefer.getInclude().size());
         assertTrue(prefer.getInclude().contains("http://example.org/test"));
         assertTrue(prefer.getOmit().isEmpty());
-        assertFalse(prefer.getHandling().isPresent());
-        assertFalse(prefer.getWait().isPresent());
+        assertNull(prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -58,12 +57,12 @@ public class PreferTest {
     @Test
     public void testPrefer1c() {
         final Prefer prefer = Prefer.valueOf("return=representation; include=http://example.org/test");
-        assertEquals(of("representation"), prefer.getPreference());
+        assertEquals("representation", prefer.getPreference());
         assertEquals(1L, prefer.getInclude().size());
         assertTrue(prefer.getInclude().contains("http://example.org/test"));
         assertTrue(prefer.getOmit().isEmpty());
-        assertFalse(prefer.getHandling().isPresent());
-        assertFalse(prefer.getWait().isPresent());
+        assertNull(prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -71,12 +70,12 @@ public class PreferTest {
     @Test
     public void testPrefer2() {
         final Prefer prefer = Prefer.valueOf("return  =  representation;   include =  \"http://example.org/test\"");
-        assertEquals(of("representation"), prefer.getPreference());
+        assertEquals("representation", prefer.getPreference());
         assertEquals(1L, prefer.getInclude().size());
         assertTrue(prefer.getInclude().contains("http://example.org/test"));
         assertTrue(prefer.getOmit().isEmpty());
-        assertFalse(prefer.getHandling().isPresent());
-        assertFalse(prefer.getWait().isPresent());
+        assertNull(prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -84,11 +83,11 @@ public class PreferTest {
     @Test
     public void testPrefer3() {
         final Prefer prefer = Prefer.valueOf("return=minimal");
-        assertEquals(of("minimal"), prefer.getPreference());
+        assertEquals("minimal", prefer.getPreference());
         assertTrue(prefer.getInclude().isEmpty());
         assertTrue(prefer.getOmit().isEmpty());
-        assertFalse(prefer.getHandling().isPresent());
-        assertFalse(prefer.getWait().isPresent());
+        assertNull(prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -98,9 +97,9 @@ public class PreferTest {
         final Prefer prefer = Prefer.valueOf("return=other");
         assertTrue(prefer.getInclude().isEmpty());
         assertTrue(prefer.getOmit().isEmpty());
-        assertFalse(prefer.getPreference().isPresent());
-        assertFalse(prefer.getHandling().isPresent());
-        assertFalse(prefer.getWait().isPresent());
+        assertNull(prefer.getPreference());
+        assertNull(prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -108,12 +107,12 @@ public class PreferTest {
     @Test
     public void testPrefer5() {
         final Prefer prefer = Prefer.valueOf("return=representation; omit=\"http://example.org/test\"");
-        assertEquals(of("representation"), prefer.getPreference());
+        assertEquals("representation", prefer.getPreference());
         assertTrue(prefer.getInclude().isEmpty());
         assertFalse(prefer.getOmit().isEmpty());
         assertTrue(prefer.getOmit().contains("http://example.org/test"));
-        assertFalse(prefer.getHandling().isPresent());
-        assertFalse(prefer.getWait().isPresent());
+        assertNull(prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -121,12 +120,12 @@ public class PreferTest {
     @Test
     public void testPrefer5b() {
         final Prefer prefer = Prefer.ofOmit("http://example.org/test");
-        assertEquals(of("representation"), prefer.getPreference());
+        assertEquals("representation", prefer.getPreference());
         assertTrue(prefer.getInclude().isEmpty());
         assertFalse(prefer.getOmit().isEmpty());
         assertTrue(prefer.getOmit().contains("http://example.org/test"));
-        assertFalse(prefer.getHandling().isPresent());
-        assertFalse(prefer.getWait().isPresent());
+        assertNull(prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -136,9 +135,9 @@ public class PreferTest {
         final Prefer prefer = Prefer.valueOf("handling=lenient; return=minimal");
         assertTrue(prefer.getInclude().isEmpty());
         assertTrue(prefer.getOmit().isEmpty());
-        assertEquals(of("minimal"), prefer.getPreference());
-        assertEquals(of("lenient"), prefer.getHandling());
-        assertFalse(prefer.getWait().isPresent());
+        assertEquals("minimal", prefer.getPreference());
+        assertEquals("lenient", prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -148,9 +147,9 @@ public class PreferTest {
         final Prefer prefer = Prefer.valueOf("respond-async; depth-noroot");
         assertTrue(prefer.getInclude().isEmpty());
         assertTrue(prefer.getOmit().isEmpty());
-        assertFalse(prefer.getPreference().isPresent());
-        assertFalse(prefer.getHandling().isPresent());
-        assertFalse(prefer.getWait().isPresent());
+        assertNull(prefer.getPreference());
+        assertNull(prefer.getHandling());
+        assertNull(prefer.getWait());
         assertTrue(prefer.getRespondAsync());
         assertTrue(prefer.getDepthNoroot());
     }
@@ -160,9 +159,9 @@ public class PreferTest {
         final Prefer prefer = Prefer.valueOf("handling=strict; return=minimal");
         assertTrue(prefer.getInclude().isEmpty());
         assertTrue(prefer.getOmit().isEmpty());
-        assertEquals(of("minimal"), prefer.getPreference());
-        assertEquals(of("strict"), prefer.getHandling());
-        assertFalse(prefer.getWait().isPresent());
+        assertEquals("minimal", prefer.getPreference());
+        assertEquals("strict", prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -172,11 +171,17 @@ public class PreferTest {
         final Prefer prefer = Prefer.valueOf("handling=blah; return=minimal");
         assertTrue(prefer.getInclude().isEmpty());
         assertTrue(prefer.getOmit().isEmpty());
-        assertEquals(of("minimal"), prefer.getPreference());
-        assertFalse(prefer.getHandling().isPresent());
-        assertFalse(prefer.getWait().isPresent());
+        assertEquals("minimal", prefer.getPreference());
+        assertNull(prefer.getHandling());
+        assertNull(prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
+    }
+
+    @Test
+    public void testPreferInvalidWait() {
+        final Prefer prefer = Prefer.valueOf("wait=blah");
+        assertNull(prefer);
     }
 
     @Test
@@ -184,9 +189,9 @@ public class PreferTest {
         final Prefer prefer = Prefer.valueOf("wait=4");
         assertTrue(prefer.getInclude().isEmpty());
         assertTrue(prefer.getOmit().isEmpty());
-        assertFalse(prefer.getPreference().isPresent());
-        assertFalse(prefer.getHandling().isPresent());
-        assertEquals((Integer)4, prefer.getWait().get());
+        assertNull(prefer.getPreference());
+        assertNull(prefer.getHandling());
+        assertEquals((Integer)4, prefer.getWait());
         assertFalse(prefer.getRespondAsync());
         assertFalse(prefer.getDepthNoroot());
     }
@@ -194,7 +199,7 @@ public class PreferTest {
     @Test
     public void testStaticInclude() {
         final Prefer prefer = Prefer.ofInclude();
-        assertEquals(of("representation"), prefer.getPreference());
+        assertEquals("representation", prefer.getPreference());
         assertTrue(prefer.getInclude().isEmpty());
         assertTrue(prefer.getOmit().isEmpty());
     }
@@ -202,7 +207,7 @@ public class PreferTest {
     @Test
     public void testStaticOmit() {
         final Prefer prefer = Prefer.ofOmit();
-        assertEquals(of("representation"), prefer.getPreference());
+        assertEquals("representation", prefer.getPreference());
         assertTrue(prefer.getInclude().isEmpty());
         assertTrue(prefer.getOmit().isEmpty());
     }

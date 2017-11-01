@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -64,11 +63,11 @@ public class Prefer {
 
     public static final String PREFER_WAIT = "wait";
 
-    private final Optional<String> preference;
+    private final String preference;
 
-    private final Optional<String> handling;
+    private final String handling;
 
-    private final Optional<Integer> wait;
+    private final Integer wait;
 
     private final List<String> include;
 
@@ -87,12 +86,12 @@ public class Prefer {
      */
     public Prefer(final String preference, final List<String> include, final List<String> omit,
             final Set<String> params, final String handling, final Integer wait) {
-        this.preference = ofNullable(preference)
-            .filter(x -> x.equals(PREFER_MINIMAL) || x.equals(PREFER_REPRESENTATION));
+        this.preference = PREFER_MINIMAL.equals(preference) ||
+            PREFER_REPRESENTATION.equals(preference) ? preference : null;
         this.include = ofNullable(include).orElseGet(Collections::emptyList);
         this.omit = ofNullable(omit).orElseGet(Collections::emptyList);
-        this.handling = ofNullable(handling).filter(x -> x.equals(PREFER_LENIENT) || x.equals(PREFER_STRICT));
-        this.wait = ofNullable(wait);
+        this.handling = PREFER_LENIENT.equals(handling) || PREFER_STRICT.equals(handling) ? handling : null;
+        this.wait = wait;
         this.params = ofNullable(params).orElseGet(Collections::emptySet);
     }
 
@@ -131,7 +130,7 @@ public class Prefer {
      * Get the preferred return type
      * @return the preferred return type
      */
-    public Optional<String> getPreference() {
+    public String getPreference() {
         return preference;
     }
 
@@ -139,7 +138,7 @@ public class Prefer {
      * Get the handling type
      * @return the preferred handling type
      */
-    public Optional<String> getHandling() {
+    public String getHandling() {
         return handling;
     }
 
@@ -147,7 +146,7 @@ public class Prefer {
      * Get the value of the wait parameter, if set
      * @return the value of the wait parameter, if available
      */
-    public Optional<Integer> getWait() {
+    public Integer getWait() {
         return wait;
     }
 
