@@ -37,13 +37,11 @@ public class Link {
         this.uri = val.startsWith("<") && val.endsWith(">") ? val.substring(1, val.length() - 1) : null;
         for (int i = 1; i < parts.length; i++) {
             final String[] p = parts[i].trim().split("=");
-            if (p.length == 2) {
-                if (!params.containsKey(p[0])) {
-                    if (p[1].startsWith("\"") && p[1].endsWith("\"")) {
-                        params.put(p[0], p[1].substring(1, p[1].length() - 1));
-                    } else {
-                        params.put(p[0], p[1]);
-                    }
+            if (p.length == 2 && !params.containsKey(p[0])) {
+                if (p[1].startsWith("\"") && p[1].endsWith("\"")) {
+                    params.put(p[0], p[1].substring(1, p[1].length() - 1));
+                } else {
+                    params.put(p[0], p[1]);
                 }
             }
         }
