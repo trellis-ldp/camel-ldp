@@ -35,24 +35,32 @@ public class ActivityStreamProcessor implements Processor {
     public static final String ACTIVITY_STREAM_OBJECT_ID = "ActivityStreamObjectId";
     public static final String ACTIVITY_STREAM_OBJECT_TYPE = "ActivityStreamObjectType";
 
+    private static final String OBJECT = "object";
+    private static final String ID = "id";
+    private static final String TYPE = "type";
+    private static final String NAME = "name";
+    private static final String ACTOR = "actor";
+    private static final String INBOX = "inbox";
+
     /**
      * Process an incoming ActivityStream message
      * @param exchange the Camel exchange
      * @throws IOException in the event of an error
      */
     public void process(final Exchange exchange) throws IOException {
+
         final Map body = exchange.getIn().getBody(Map.class);
 
-        setHeader(exchange, ACTIVITY_STREAM_ID, body.get("id"));
-        setHeader(exchange, ACTIVITY_STREAM_TYPE, body.get("type"));
-        setHeader(exchange, ACTIVITY_STREAM_NAME, body.get("name"));
-        setHeader(exchange, ACTIVITY_STREAM_ACTOR, body.get("actor"));
-        setHeader(exchange, ACTIVITY_STREAM_INBOX, body.get("inbox"));
+        setHeader(exchange, ACTIVITY_STREAM_ID, body.get(ID));
+        setHeader(exchange, ACTIVITY_STREAM_TYPE, body.get(TYPE));
+        setHeader(exchange, ACTIVITY_STREAM_NAME, body.get(NAME));
+        setHeader(exchange, ACTIVITY_STREAM_ACTOR, body.get(ACTOR));
+        setHeader(exchange, ACTIVITY_STREAM_INBOX, body.get(INBOX));
 
-        if (body.containsKey("object") && body.get("object") instanceof Map) {
-            final Map object = (Map) body.get("object");
-            setHeader(exchange, ACTIVITY_STREAM_OBJECT_ID, object.get("id"));
-            setHeader(exchange, ACTIVITY_STREAM_OBJECT_TYPE, object.get("type"));
+        if (body.containsKey(OBJECT) && body.get(OBJECT) instanceof Map) {
+            final Map object = (Map) body.get(OBJECT);
+            setHeader(exchange, ACTIVITY_STREAM_OBJECT_ID, object.get(ID));
+            setHeader(exchange, ACTIVITY_STREAM_OBJECT_TYPE, object.get(TYPE));
         }
     }
 
