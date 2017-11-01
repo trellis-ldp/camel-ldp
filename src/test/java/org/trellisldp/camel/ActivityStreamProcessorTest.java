@@ -95,6 +95,8 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
         final Map<String, Object> data = new HashMap<>();
         data.put("id", id);
         data.put("type", asList("Create", PROV_ACTIVITY));
+        data.put("object", "STRING-VALUE");
+        data.put("inbox", 4L);
 
         template.sendBody("direct:start", data);
 
