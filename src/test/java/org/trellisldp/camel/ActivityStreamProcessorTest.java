@@ -13,6 +13,15 @@
  */
 package org.trellisldp.camel;
 
+import static java.util.Arrays.asList;
+import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_ACTOR;
+import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_ID;
+import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_INBOX;
+import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_NAME;
+import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_TYPE;
+import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_OBJECT_ID;
+import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_OBJECT_TYPE;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +39,12 @@ import org.junit.Test;
  */
 public class ActivityStreamProcessorTest extends CamelTestSupport {
 
+    private static final String PROV_ACTIVITY = "http://www.w3.org/ns/prov#Activity";
+
+    private static final String LDP_CONTAINER = "ldp:Container";
+
+    private static final String LDP_RDF_SOURCE = "ldp:RDFSource";
+
     @EndpointInject(uri = "mock:result")
     private MockEndpoint resultEndpoint;
 
@@ -38,11 +53,76 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
 
     @Test
     public void testActivityStreamProcessor() throws IOException, InterruptedException {
+
+        final String id = "unique-identifier";
+        final String resource = "http://localhost/repository/resource";
+        final String agent = "http://example.org/user1";
+        final String inbox = "http://example.org/inbox";
+        final String name = "user1 created a resource";
+
+        final Map<String, Object> obj = new HashMap<>();
+
+        obj.put("id", resource);
+        obj.put("type", asList(LDP_CONTAINER, LDP_RDF_SOURCE));
+
         final Map<String, Object> data = new HashMap<>();
+        data.put("id", id);
+        data.put("type", asList("Create", PROV_ACTIVITY));
+        data.put("actor", agent);
+        data.put("name", name);
+        data.put("inbox", inbox);
+        data.put("object", obj);
 
         template.sendBody("direct:start", data);
 
         resultEndpoint.expectedMessageCount(1);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_ID, id);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_TYPE, asList("Create", PROV_ACTIVITY));
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_NAME, name);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_INBOX, inbox);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_ACTOR, agent);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_ID, resource);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_TYPE,
+                asList(LDP_CONTAINER, LDP_RDF_SOURCE));
+        resultEndpoint.assertIsSatisfied();
+    }
+
+    @Test
+    public void testActivityStreamProcessorMissingSomeValues() throws IOException, InterruptedException {
+
+        final String id = "unique-id";
+
+        final Map<String, Object> data = new HashMap<>();
+        data.put("id", id);
+        data.put("type", asList("Create", PROV_ACTIVITY));
+
+        template.sendBody("direct:start", data);
+
+        resultEndpoint.expectedMessageCount(1);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_ID, id);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_TYPE, asList("Create", PROV_ACTIVITY));
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_NAME, null);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_INBOX, null);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_ACTOR, null);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_ID, null);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_TYPE, null);
+        resultEndpoint.assertIsSatisfied();
+    }
+
+    @Test
+    public void testActivityStreamProcessorMissingAllValues() throws IOException, InterruptedException {
+
+        final Map<String, Object> data = new HashMap<>();
+        template.sendBody("direct:start", data);
+
+        resultEndpoint.expectedMessageCount(1);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_ID, null);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_TYPE, null);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_NAME, null);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_INBOX, null);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_ACTOR, null);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_ID, null);
+        resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_TYPE, null);
         resultEndpoint.assertIsSatisfied();
     }
 
@@ -55,5 +135,4 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
             }
         };
     }
-
 }
