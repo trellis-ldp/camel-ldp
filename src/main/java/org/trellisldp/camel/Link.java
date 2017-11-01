@@ -33,19 +33,19 @@ public class Link {
      */
     public Link(final String value) {
         final String[] parts = value.split(";");
-        if (parts.length >= 1) {
-            final String val = parts[0].trim();
-            this.uri = val.startsWith("<") && val.endsWith(">") ? val.substring(1, val.length() - 1) : null;
-            for (int i = 1; i < parts.length; i++) {
-                final String[] p = parts[1].trim().split("=");
-                if (p.length == 2) {
-                    if (!params.containsKey(p[0])) {
+        final String val = parts[0].trim();
+        this.uri = val.startsWith("<") && val.endsWith(">") ? val.substring(1, val.length() - 1) : null;
+        for (int i = 1; i < parts.length; i++) {
+            final String[] p = parts[i].trim().split("=");
+            if (p.length == 2) {
+                if (!params.containsKey(p[0])) {
+                    if (p[1].startsWith("\"") && p[1].endsWith("\"")) {
+                        params.put(p[0], p[1].substring(1, p[1].length() - 1));
+                    } else {
                         params.put(p[0], p[1]);
                     }
                 }
             }
-        } else {
-            this.uri = null;
         }
     }
 
