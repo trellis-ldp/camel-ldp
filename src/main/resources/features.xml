@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="camel-ldp-${project.version}">
+  <feature name="camel-ldp" version="${project.version}">
+    <details>Installs the camel-ldp module</details>
+
+    <feature version="${camelVersionRange}">camel</feature>
+
+    <bundle>mvn:org.trellisldp.camel/camel-ldp/${project.version}</bundle>
+  </feature>
+</features>
