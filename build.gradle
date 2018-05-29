@@ -25,30 +25,26 @@ description = 'LDP Utilities for Apache Camel'
 ext {
     moduleName = 'org.trellisldp.camel'
     vendor = 'Trellis LDP'
-    homepage = 'http://www.trellisldp.org'
-    docURL = 'http://www.trellisldp.org/apidocs'
+    homepage = 'https://www.trellisldp.org'
+    docURL = 'https://trellis-ldp.github.io/trellis/apidocs/'
     license = 'Apache 2'
 
     /* Dependencies */
     camelVersion = '2.21.1'
 
     /* Testing */
+    activationVersion = '1.1.1'
+    apiguardianVersion = '1.0.0'
     checkstyleVersion = '8.10'
-    junitVersion = '5.2.0'
-    junitPlatformVersion = '1.2.0'
     jaxbVersion = '2.3.0'
     jacocoVersion = '0.8.1'
-    activationVersion = '1.1.1'
+    junitPlatformVersion = '1.2.0'
+    junitVersion = '5.2.0'
     logbackVersion = '1.2.3'
-    apiguardianVersion = '1.0.0'
 
     /* OSGi */
     camelVersionRange = '[2.16,3)'
     projectOsgiVersion = project.version.replaceAll("-SNAPSHOT", ".SNAPSHOT")
-}
-
-configurations {
-    buildToolsConfig
 }
 
 jacocoTestReport {
@@ -61,15 +57,13 @@ jacocoTestReport {
 dependencies {
     api group: 'org.apache.camel', name: 'camel-core', version: camelVersion
 
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
     testImplementation group: 'org.apiguardian', name: 'apiguardian-api', version: apiguardianVersion
     testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: junitPlatformVersion
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitVersion
     testImplementation group: 'org.apache.camel', name: 'camel-test', version: camelVersion
     testImplementation group: 'javax.xml.bind', name: 'jaxb-api', version: jaxbVersion
-    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
     testImplementation group: 'javax.activation', name: 'activation', version: activationVersion
-
-    buildToolsConfig 'org.trellisldp:trellis-build-tools:0.2.0'
 }
 
 repositories {
