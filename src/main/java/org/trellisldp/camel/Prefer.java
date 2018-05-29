@@ -34,7 +34,7 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 
 /**
- * A class representing an HTTP Prefer header
+ * A class representing an HTTP Prefer header.
  *
  * @author acoburn
  *
@@ -76,7 +76,7 @@ public class Prefer {
     private final Set<String> params;
 
     /**
-     * Create a Prefer header representation
+     * Create a Prefer header representation.
      * @param preference the preference value
      * @param include a list of include values
      * @param omit a list of omit values
@@ -96,7 +96,7 @@ public class Prefer {
     }
 
     /**
-     * Create a Prefer header representation from a header string
+     * Create a Prefer header representation from a header string.
      * @param value the header value
      * @return a Prefer object or null on an invalid string
      */
@@ -127,7 +127,7 @@ public class Prefer {
     }
 
     /**
-     * Get the preferred return type
+     * Get the preferred return type.
      * @return the preferred return type
      */
     public String getPreference() {
@@ -135,7 +135,7 @@ public class Prefer {
     }
 
     /**
-     * Get the handling type
+     * Get the handling type.
      * @return the preferred handling type
      */
     public String getHandling() {
@@ -143,7 +143,7 @@ public class Prefer {
     }
 
     /**
-     * Get the value of the wait parameter, if set
+     * Get the value of the wait parameter, if set.
      * @return the value of the wait parameter, if available
      */
     public Integer getWait() {
@@ -151,7 +151,7 @@ public class Prefer {
     }
 
     /**
-     * Identify whether the respond-async parameter was set
+     * Identify whether the respond-async parameter was set.
      * @return true if the respond-async parameter was set; false otherwise
      */
     public Boolean getRespondAsync() {
@@ -159,7 +159,7 @@ public class Prefer {
     }
 
     /**
-     * Identify whether the depth-noroot parameter was set
+     * Identify whether the depth-noroot parameter was set.
      * @return true if the depth-noroot parameter was set; false otherwise
      */
     public Boolean getDepthNoroot() {
@@ -167,7 +167,7 @@ public class Prefer {
     }
 
     /**
-     * Get the preferred include IRIs
+     * Get the preferred include IRIs.
      * @return the list of IRIs to be included in the representation
      */
     public List<String> getInclude() {
@@ -175,7 +175,7 @@ public class Prefer {
     }
 
     /**
-     * Get the preferred omit IRIs
+     * Get the preferred omit IRIs.
      * @return the list of IRIs to be omitted from the representation
      */
     public List<String> getOmit() {
@@ -191,7 +191,7 @@ public class Prefer {
             param.substring(1, param.length() - 1) : param;
 
     /**
-     * Build a Prefer object with a set of included IRIs
+     * Build a Prefer object with a set of included IRIs.
      * @param includes the IRIs to include
      * @return the Prefer object
      */
@@ -205,7 +205,7 @@ public class Prefer {
     }
 
     /**
-     * Build a Prefer object with a set of omitted IRIs
+     * Build a Prefer object with a set of omitted IRIs.
      * @param omits the IRIs to omit
      * @return the Prefer object
      */

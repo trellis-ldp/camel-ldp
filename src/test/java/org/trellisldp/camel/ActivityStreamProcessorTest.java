@@ -18,9 +18,9 @@ import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_ACTOR
 import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_ID;
 import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_INBOX;
 import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_NAME;
-import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_TYPE;
 import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_OBJECT_ID;
 import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_OBJECT_TYPE;
+import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_TYPE;
 
 import java.io.IOException;
 import java.util.HashMap;

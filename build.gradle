@@ -33,6 +33,7 @@ ext {
     camelVersion = '2.21.1'
 
     /* Testing */
+    checkstyleVersion = '8.10'
     junitVersion = '5.2.0'
     junitPlatformVersion = '1.2.0'
     jaxbVersion = '2.3.0'
@@ -134,7 +135,7 @@ jacoco {
 
 license {
     include "**/*.java"
-    header rootProject.file('build/license/HEADER.txt')
+    header rootProject.file('buildtools/src/main/resources/license/HEADER.txt')
     strictCheck true
     mapping {
         java = 'SLASHSTAR_STYLE'
@@ -217,22 +218,10 @@ uploadArchives {
     }
 }
 
-task processBuildTools(type: Copy) {
-    from {
-        configurations.buildToolsConfig.collect {
-            zipTree(it).matching {
-                include 'checkstyle/*.xml'
-                include 'license/*.txt'
-            }
-        }
-    }
-    into 'build'
-}
-
 checkstyle {
-    configFile = rootProject.file('build/checkstyle/checkstyle.xml')
-    configProperties.checkstyleConfigDir = rootProject.file('build/checkstyle/')
-    toolVersion = '8.1'
+    configFile = rootProject.file('buildtools/src/main/resources/checkstyle/checkstyle.xml')
+    configProperties.checkstyleConfigDir = rootProject.file('buildtools/src/main/resources/checkstyle/')
+    toolVersion = checkstyleVersion
 }
 
 // Ignore alpha, beta, milestone and release candidates
@@ -269,7 +258,6 @@ task docs(type: Javadoc) {
     }
 }
 
-checkstyleMain.dependsOn processBuildTools
 afterReleaseBuild.dependsOn uploadArchives
 afterReleaseBuild.dependsOn docs
 

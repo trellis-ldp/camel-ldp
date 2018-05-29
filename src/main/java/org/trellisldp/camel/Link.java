@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * An object representing an HTTP Link header.
+ *
  * @author acoburn
  */
 public class Link {
@@ -28,7 +30,7 @@ public class Link {
     private final Map<String, String> params = new HashMap<>();
 
     /**
-     * Create a Link object from an HTTP header
+     * Create a Link object from an HTTP header.
      * @param value the value of the link header
      */
     public Link(final String value) {
@@ -48,7 +50,7 @@ public class Link {
     }
 
     /**
-     * Get the URI portion of the link header
+     * Get the URI portion of the link header.
      * @return the URI
      */
     public String getUri() {
@@ -56,7 +58,7 @@ public class Link {
     }
 
     /**
-     * Get the type portion of the link header, if one exists
+     * Get the type portion of the link header, if one exists.
      * @return the type or null if one doesn not exist
      */
     public String getType() {
@@ -64,7 +66,7 @@ public class Link {
     }
 
     /**
-     * Get the title portion of the link header, if one exists
+     * Get the title portion of the link header, if one exists.
      * @return the title or null if one doesn not exist
      */
     public String getTitle() {
@@ -72,7 +74,7 @@ public class Link {
     }
 
     /**
-     * Get the rel portion of the link header, if one exists
+     * Get the rel portion of the link header, if one exists.
      * @return the rel or null if one doesn not exist
      */
     public String getRel() {

@@ -23,6 +23,9 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
 /**
+ * A Processor class that transforms an Activity Stream-based message into
+ * easy-to-use Message headers.
+ *
  * @author acoburn
  */
 public class ActivityStreamProcessor implements Processor {
@@ -43,7 +46,7 @@ public class ActivityStreamProcessor implements Processor {
     private static final String INBOX = "inbox";
 
     /**
-     * Process an incoming ActivityStream message
+     * Process an incoming ActivityStream message.
      * @param exchange the Camel exchange
      * @throws IOException in the event of an error
      */
