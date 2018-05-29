@@ -49,6 +49,16 @@ public class LinkTest {
     }
 
     @Test
+    public void testLinkRelBadQuotes() {
+        final Link link = new Link("<http://www.w3.org/ns/ldp#Container>; rel=\"type");
+        assertEquals("http://www.w3.org/ns/ldp#Container", link.getUri());
+        assertEquals("\"type", link.getRel());
+        assertNull(link.getTitle());
+        assertNull(link.getType());
+        assertEquals(1L, link.getParams().size());
+    }
+
+    @Test
     public void testLinkRelNoQuotes() {
         final Link link = new Link("<http://www.w3.org/ns/ldp#Container>;rel=type");
         assertEquals("http://www.w3.org/ns/ldp#Container", link.getUri());
