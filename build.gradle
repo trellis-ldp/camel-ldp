@@ -79,7 +79,6 @@ gradle.projectsEvaluated {
 }
 
 test {
-    useJUnitPlatform()
     jacoco {
         enabled = ! JavaVersion.current().isJava11Compatible()
     }
