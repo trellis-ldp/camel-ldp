@@ -33,7 +33,7 @@ ext {
     camelVersion = '2.21.1'
 
     /* Testing */
-    activationVersion = '1.1.1'
+    activationVersion = '1.2.0'
     apiguardianVersion = '1.0.0'
     checkstyleVersion = '8.10'
     jaxbVersion = '2.3.0'
@@ -63,7 +63,7 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitVersion
     testImplementation group: 'org.apache.camel', name: 'camel-test', version: camelVersion
     testImplementation group: 'javax.xml.bind', name: 'jaxb-api', version: jaxbVersion
-    testImplementation group: 'javax.activation', name: 'activation', version: activationVersion
+    testImplementation group: 'javax.activation', name: 'javax.activation-api', version: activationVersion
 }
 
 repositories {
