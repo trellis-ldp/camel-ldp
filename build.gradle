@@ -18,7 +18,6 @@ apply plugin: 'jacoco'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
 group = 'org.trellisldp'
 description = 'LDP Utilities for Apache Camel'
 
@@ -30,7 +29,7 @@ ext {
     license = 'Apache 2'
 
     /* Dependencies */
-    camelVersion = '2.21.1'
+    camelVersion = '2.22.0'
 
     /* Testing */
     activationVersion = '1.2.0'
@@ -217,6 +216,14 @@ uploadArchives {
         }
     }
 }
+
+gradle.taskGraph.whenReady( { graph ->
+    tasks.withType(AbstractArchiveTask).each { archive ->
+        archive.doLast {
+            ant.checksum file: archive.archivePath, algorithm: 'sha-256', format: 'MD5SUM', fileext: '.sha256'
+        }
+    }
+})
 
 checkstyle {
     configFile = rootProject.file('buildtools/src/main/resources/checkstyle/checkstyle.xml')
