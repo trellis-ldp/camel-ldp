@@ -29,7 +29,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 import org.slf4j.Logger;
 
@@ -183,12 +182,14 @@ public class Prefer {
     }
 
     private static List<String> parseParameter(final String param) {
-        return ofNullable(param).map(trimQuotes).map(x -> asList(x.split("\\s+"))).orElseGet(Collections::emptyList);
+        return ofNullable(param).map(Prefer::trimQuotes).map(x -> asList(x.split("\\s+")))
+            .orElseGet(Collections::emptyList);
     }
 
-    private static Function<String, String> trimQuotes = param ->
-        param.startsWith("\"") && param.endsWith("\"") && param.length() > 1 ?
+    private static String trimQuotes(final String param) {
+        return param.startsWith("\"") && param.endsWith("\"") && param.length() > 1 ?
             param.substring(1, param.length() - 1) : param;
+    }
 
     /**
      * Build a Prefer object with a set of included IRIs.
