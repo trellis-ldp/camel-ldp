@@ -5,9 +5,7 @@ group: edge
 
 addons:
   sonarcloud:
-    organization: "trellis-ldp"
-    token:
-      secure: "clei2X67e/sZT1HdYAd6rXrGtXPi4zH9ToMKXt/jGy3XuviIUThk7b3mNbdrRDXb7vid/OoW1YJWuhOQW0+cxiV9yk5alenSRcNRLh/sxWuWZW6OHsx2N9a7OF2ECAhAlOFjL+60azkNdLAPmy3VIC6Wt39QYl3QAWgMuSwKfK8/idEBxFs3I1IzbccWx8N5Lu9+/LAEZfkW8yAvt05eOExKSp29LyjwGH48cKNAQCPEEMWci0I838bycLmhGM5vToBKY/Q/H8s8FyQA3F8HW46LHmJlJdcclm1JrtsKprjL97c1yGLJsfOXGi3n2qharo8wMOfyTqmdYar/6HHUWJbS2uKDzBwgKrtW2sLzpADFh3Sn3phvuere+hQ6qgPEu1Q44p1oDLiNi2iDsuWUxLglwGKnJw7VgeeXJu845kEd7ThbeeYl3MpUrx0NiJQFmUUlx+uQT2WbzzR7wIEj6mLtmcCcDg6LxsPMUfkl40TnG9j061HZjj+7d16Dk15TXiBBJhR11+Ie0jf4wG4Gl/3yVTcNx1GUoybweJ5svKn66pQp2nKrQ6k2nKC6u/m7HRfxYiTlM8olDaJ56doPooFo3wk+LglEVBC0JJVgH1Ocky//vFbCgMP9Ho1tNnzhADi4U0+9GTFyzeuAkPYrXqAAObQGS7dMSGlacx3PrRQ="
+    organization: trellis-ldp
 
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
