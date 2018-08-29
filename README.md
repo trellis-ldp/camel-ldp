@@ -1,6 +1,6 @@
 # camel-ldp
 
-[![Build Status](https://travis-ci.org/trellis-ldp/camel-ldp.svg?branch=master)](https://travis-ci.org/trellis-ldp/camel-ldp)
+[![Build Status](https://travis-ci.com/trellis-ldp/camel-ldp.svg?branch=master)](https://travis-ci.com/trellis-ldp/camel-ldp)
 [![Build status](https://ci.appveyor.com/api/projects/status/uy67j48dh6vm18un/branch/master?svg=true)](https://ci.appveyor.com/project/acoburn/trellis-api/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/trellis-ldp/camel-ldp/badge.svg?branch=master)](https://coveralls.io/github/trellis-ldp/camel-ldp?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.trellisldp/camel-ldp/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.trellisldp/camel-ldp/)
