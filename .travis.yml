@@ -24,7 +24,6 @@ matrix:
     include:
         - jdk: oraclejdk8
           after_success: ./gradlew jacocoTestReport coveralls sonarqube
-        - jdk: oraclejdk9
         - jdk: oraclejdk10
         - jdk: oraclejdk11
 
