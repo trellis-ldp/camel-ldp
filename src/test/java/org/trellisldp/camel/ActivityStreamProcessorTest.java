@@ -85,6 +85,9 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
         resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_TYPE,
                 asList(LDP_CONTAINER, LDP_RDF_SOURCE));
         resultEndpoint.assertIsSatisfied();
+
+        final Map result = resultEndpoint.getExchanges().get(0).getIn().getBody(Map.class);
+        assertEquals("Check the result body", data, result);
     }
 
     @Test
@@ -109,6 +112,9 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
         resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_ID, null);
         resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_TYPE, null);
         resultEndpoint.assertIsSatisfied();
+
+        final Map result = resultEndpoint.getExchanges().get(0).getIn().getBody(Map.class);
+        assertEquals("Check the result body", data, result);
     }
 
     @Test
@@ -126,6 +132,9 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
         resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_ID, null);
         resultEndpoint.expectedHeaderReceived(ACTIVITY_STREAM_OBJECT_TYPE, null);
         resultEndpoint.assertIsSatisfied();
+
+        final Map result = resultEndpoint.getExchanges().get(0).getIn().getBody(Map.class);
+        assertEquals("Check the result body", data, result);
     }
 
     @Override
