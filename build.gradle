@@ -239,6 +239,12 @@ dependencyUpdates.resolutionStrategy = {
     }
 }
 
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
 sonarqube {
     properties {
         property "sonar.projectName", "LDP Utilities for Camel"
