@@ -138,7 +138,71 @@ license {
 publishing {
     publications {
         maven(MavenPublication) {
+            pom {
+                packaging = 'jar'
+                url = 'https://www.trellisldp.org'
+                inceptionYear = '2017'
+                name = 'LDP Utilities for Apache Camel'
+                description = 'Utilities for asynchronous integrations with Apache Camel'
+
+                organization {
+                    name = project.vendor
+                    url = project.homepage
+                }
+
+                developers {
+                    developer {
+                        id = 'acoburn'
+                        name = 'Aaron Coburn'
+                        email = 'acoburn (at) apache (dot) org'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git://github.com/trellis-ldp/camel-ldp.git'
+                    developerConnection = 'scm:git:git@github.com/trellis-ldp/camel-ldp.git'
+                    url = 'https://github.com/trellis-ldp/camel-ldp'
+                    tag = 'HEAD'
+                }
+
+                licenses {
+                    license {
+                        name = 'Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0'
+                        comments = 'Copyright (c) 2017-2018 Trellis LDP'
+                    }
+                }
+
+            }
+            pom.withXml {
+                // eliminate test-scoped dependencies
+                asNode().dependencies.removeAll { dep -> dep.scope == "test" }
+            }
+
             from components.java
+
+            artifact(sourceJar) {
+                classifier = 'sources'
+            }
+
+            artifact(javadocJar) {
+                classifier = 'javadoc'
+            }
+        }
+    }
+    repositories {
+        maven {
+            def sonatypeUsername = project.hasProperty('ossrhUsername') ? ossrhUsername : System.getenv("SONATYPE_USERNAME") ?: ""
+            def sonatypePassword = project.hasProperty('ossrhPassword') ? ossrhPassword : System.getenv("SONATYPE_PASSWORD") ?: ""
+            if (version.endsWith("SNAPSHOT")) {
+                url "https://oss.sonatype.org/content/repositories/snapshots/"
+            } else {
+                url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            }
+            credentials {
+                username sonatypeUsername
+                password sonatypePassword
+            }
         }
     }
 }
@@ -150,74 +214,8 @@ processResources {
 
 signing {
     required { !version.endsWith("SNAPSHOT") && gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
+    sign publishing.publications
 }
-
-uploadArchives {
-    repositories.mavenDeployer {
-        def sonatypeUsername = project.hasProperty('ossrhUsername') ? ossrhUsername : System.getenv("SONATYPE_USERNAME") ?: ""
-        def sonatypePassword = project.hasProperty('ossrhPassword') ? ossrhPassword : System.getenv("SONATYPE_PASSWORD") ?: ""
-        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-        repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-            authentication(userName: sonatypeUsername, password: sonatypePassword)
-        }
-
-        snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-            authentication(userName: sonatypeUsername, password: sonatypePassword)
-        }
-
-        pom.project {
-            packaging 'jar'
-            url 'http://www.trellisldp.org'
-            inceptionYear '2017'
-            name 'LDP Utilities for Apache Camel'
-            description 'Utilities for asynchronous integrations with Apache Camel'
-
-            organization {
-                name project.vendor
-                url project.homepage
-            }
-
-            developers {
-                developer {
-                    id 'acoburn'
-                    name 'Aaron Coburn'
-                    email 'acoburn @ (domain of organization url)'
-                    organization 'Amherst College'
-                    organizationUrl 'https://www.amherst.edu'
-                    roles {
-                        role 'developer'
-                    }
-                    timezone '-5'
-                }
-            }
-
-            scm {
-                connection 'scm:git:git://github.com/trellis-ldp/camel-ldp.git'
-                developerConnection 'scm:git:git@github.com/trellis-ldp/camel-ldp.git'
-                url 'https://github.com/trellis-ldp/camel-ldp'
-                tag 'HEAD'
-            }
-
-            licenses {
-                license {
-                    name 'Apache License, Version 2.0'
-                    url 'http://www.apache.org/licenses/LICENSE-2.0'
-                    comments 'Copyright (c) 2017-2018 Trellis LDP'
-                }
-            }
-        }
-    }
-}
-
-gradle.taskGraph.whenReady( { graph ->
-    tasks.withType(AbstractArchiveTask).each { archive ->
-        archive.doLast {
-            ant.checksum file: archive.archivePath, algorithm: 'sha-256', format: 'MD5SUM', fileext: '.sha256'
-        }
-    }
-})
 
 checkstyle {
     configFile = rootProject.file('buildtools/src/main/resources/checkstyle/checkstyle.xml')
@@ -271,6 +269,6 @@ task getVersion {
     }
 }
 
-afterReleaseBuild.dependsOn uploadArchives
+afterReleaseBuild.dependsOn publish
 afterReleaseBuild.dependsOn docs
 
