@@ -155,8 +155,8 @@ signing {
 
 uploadArchives {
     repositories.mavenDeployer {
-        def sonatypeUsername = project.hasProperty('ossrhUsername') ? ossrhUsername : ""
-        def sonatypePassword = project.hasProperty('ossrhPassword') ? ossrhPassword : ""
+        def sonatypeUsername = project.hasProperty('ossrhUsername') ? ossrhUsername : System.getenv("SONATYPE_USERNAME") ?: ""
+        def sonatypePassword = project.hasProperty('ossrhPassword') ? ossrhPassword : System.getenv("SONATYPE_PASSWORD") ?: ""
         beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
         repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
@@ -262,6 +262,12 @@ task docs(type: Javadoc) {
     destinationDir = new File(projectDir, "docs/${version}")
     options {
         links "http://docs.oracle.com/javase/8/docs/api/"
+    }
+}
+
+task getVersion {
+    doLast {
+        println project.version
     }
 }
 
