@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"org.trellisldp.camel","l":"ActivityStreamProcessor"},{"p":"org.trellisldp.camel","l":"Link"},{"p":"org.trellisldp.camel","l":"Prefer"}]
