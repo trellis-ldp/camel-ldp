@@ -36,7 +36,7 @@ jobs:
         - name: "Java 8"
           stage: test
           jdk: oraclejdk8
-          script: ./gradlew check install jacocoTestReport
+          script: ./gradlew check install jacocoTestReport --scan
           after_success: ./gradlew coveralls sonarqube
 
         # JDK 11
