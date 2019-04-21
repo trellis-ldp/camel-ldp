@@ -13,8 +13,6 @@
  */
 package org.trellisldp.camel;
 
-import static java.util.Objects.nonNull;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +66,7 @@ public class ActivityStreamProcessor implements Processor {
     }
 
     private void setHeader(final Exchange exchange, final String header, final Object value) {
-        if (nonNull(value) && (value instanceof String || value instanceof List)) {
+        if (value != null && (value instanceof String || value instanceof List)) {
             exchange.getIn().setHeader(header, value);
         }
     }

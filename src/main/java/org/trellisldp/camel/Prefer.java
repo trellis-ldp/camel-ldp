@@ -17,13 +17,12 @@ import static java.lang.Integer.parseInt;
 import static java.lang.String.join;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 import static java.util.Collections.unmodifiableList;
-import static java.util.Objects.nonNull;
-import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.joining;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -87,11 +86,11 @@ public class Prefer {
             final Set<String> params, final String handling, final Integer wait) {
         this.preference = PREFER_MINIMAL.equals(preference) ||
             PREFER_REPRESENTATION.equals(preference) ? preference : null;
-        this.include = ofNullable(include).orElseGet(Collections::emptyList);
-        this.omit = ofNullable(omit).orElseGet(Collections::emptyList);
+        this.include = include != null ? include : emptyList();
+        this.omit = omit != null ? omit : emptyList();
         this.handling = PREFER_LENIENT.equals(handling) || PREFER_STRICT.equals(handling) ? handling : null;
         this.wait = wait;
-        this.params = ofNullable(params).orElseGet(Collections::emptySet);
+        this.params = params != null ? params : emptySet();
     }
 
     /**
@@ -100,7 +99,7 @@ public class Prefer {
      * @return a Prefer object or null on an invalid string
      */
     public static Prefer valueOf(final String value) {
-        if (nonNull(value)) {
+        if (value != null) {
             final Map<String, String> data = new HashMap<>();
             final Set<String> params = new HashSet<>();
             stream(value.split(";")).map(String::trim).map(pref -> pref.split("=", 2)).forEach(x -> {
@@ -113,7 +112,7 @@ public class Prefer {
             final String waitValue = data.get(PREFER_WAIT);
             try {
                 Integer wait = null;
-                if (nonNull(waitValue)) {
+                if (waitValue != null) {
                     wait = parseInt(waitValue);
                 }
                 return new Prefer(data.get(PREFER_RETURN), parseParameter(data.get(PREFER_INCLUDE)),
@@ -182,8 +181,10 @@ public class Prefer {
     }
 
     private static List<String> parseParameter(final String param) {
-        return ofNullable(param).map(Prefer::trimQuotes).map(x -> asList(x.split("\\s+")))
-            .orElseGet(Collections::emptyList);
+        if (param != null) {
+            return asList(trimQuotes(param).split("\\s+"));
+        }
+        return emptyList();
     }
 
     private static String trimQuotes(final String param) {
