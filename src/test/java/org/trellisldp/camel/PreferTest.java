@@ -239,6 +239,18 @@ public class PreferTest {
     }
 
     @Test
+    public void testPreferWithNullValues() {
+        final Prefer prefer = new Prefer(null, null, null, null, null, 0);
+        assertNull(prefer.getPreference());
+        assertNull(prefer.getHandling());
+        assertEquals(0, prefer.getWait());
+        assertTrue(prefer.getInclude().isEmpty());
+        assertTrue(prefer.getOmit().isEmpty());
+        assertFalse(prefer.getRespondAsync());
+        assertFalse(prefer.getDepthNoroot());
+    }
+
+    @Test
     public void testNullPrefer() {
         assertNull(Prefer.valueOf(null));
     }
