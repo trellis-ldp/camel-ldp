@@ -31,21 +31,22 @@ ext {
     license = 'Apache 2'
 
     /* Dependencies */
-    camelVersion = '2.23.1'
-    slf4jVersion = '1.7.26'
+    camelVersion = '3.0.0'
+    slf4jVersion = '1.7.30'
 
     /* Testing */
-    activationVersion = '1.2.0'
-    apiguardianVersion = '1.0.0'
+    activationApiVersion = '1.2.1'
+    jaxbApiVersion = '2.3.2'
+    junitPlatformVersion = '1.5.2'
+    junitVersion = '5.5.2'
+
+    /* Tooling */
     checkstyleVersion = '8.18'
-    jaxbVersion = '2.3.1'
     jacocoVersion = '0.8.3'
-    junitPlatformVersion = '1.4.1'
-    junitVersion = '5.4.1'
     logbackVersion = '1.2.3'
 
     /* OSGi */
-    camelVersionRange = '[2.16,3)'
+    camelVersionRange = '[3,4)'
     projectOsgiVersion = project.version.replaceAll("-SNAPSHOT", ".SNAPSHOT")
 }
 
@@ -57,17 +58,16 @@ jacocoTestReport {
 }
 
 dependencies {
-    api group: 'org.apache.camel', name: 'camel-core', version: camelVersion
+    api group: 'org.apache.camel', name: 'camel-api', version: camelVersion
 
     implementation group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
 
     testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
-    testImplementation group: 'org.apiguardian', name: 'apiguardian-api', version: apiguardianVersion
     testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: junitPlatformVersion
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitVersion
     testImplementation group: 'org.apache.camel', name: 'camel-test', version: camelVersion
-    testImplementation group: 'javax.xml.bind', name: 'jaxb-api', version: jaxbVersion
-    testImplementation group: 'javax.activation', name: 'javax.activation-api', version: activationVersion
+    testImplementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: jaxbApiVersion
+    testImplementation group: 'jakarta.activation', name: 'jakarta.activation-api', version: activationApiVersion
 }
 
 repositories {
@@ -251,6 +251,10 @@ sonarqube {
 buildScan {
     termsOfServiceUrl = 'https://gradle.com/terms-of-service'
     termsOfServiceAgree = 'yes'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 task docs(type: Javadoc) {
