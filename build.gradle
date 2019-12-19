@@ -65,7 +65,7 @@ dependencies {
     testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
     testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: junitPlatformVersion
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitVersion
-    testImplementation group: 'org.apache.camel', name: 'camel-test', version: camelVersion
+    testImplementation group: 'org.apache.camel', name: 'camel-test-junit5', version: camelVersion
     testImplementation group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: jaxbApiVersion
     testImplementation group: 'jakarta.activation', name: 'jakarta.activation-api', version: activationApiVersion
 }

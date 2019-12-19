@@ -14,6 +14,7 @@
 package org.trellisldp.camel;
 
 import static java.util.Arrays.asList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_ACTOR;
 import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_ID;
 import static org.trellisldp.camel.ActivityStreamProcessor.ACTIVITY_STREAM_INBOX;
@@ -31,8 +32,8 @@ import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.test.junit4.CamelTestSupport;
-import org.junit.Test;
+import org.apache.camel.test.junit5.CamelTestSupport;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author acoburn
@@ -87,7 +88,7 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
         resultEndpoint.assertIsSatisfied();
 
         final Map result = resultEndpoint.getExchanges().get(0).getIn().getBody(Map.class);
-        assertEquals("Check the result body", data, result);
+        assertEquals(data, result, "Check the result body");
     }
 
     @Test
@@ -114,7 +115,7 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
         resultEndpoint.assertIsSatisfied();
 
         final Map result = resultEndpoint.getExchanges().get(0).getIn().getBody(Map.class);
-        assertEquals("Check the result body", data, result);
+        assertEquals(data, result, "Check the result body");
     }
 
     @Test
@@ -134,7 +135,7 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
         resultEndpoint.assertIsSatisfied();
 
         final Map result = resultEndpoint.getExchanges().get(0).getIn().getBody(Map.class);
-        assertEquals("Check the result body", data, result);
+        assertEquals(data, result, "Check the result body");
     }
 
     @Override
