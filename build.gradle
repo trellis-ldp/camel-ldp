@@ -245,6 +245,7 @@ sonarqube {
         property "sonar.links.homepage", "https://github.com/trellis-ldp/trellis"
         property "sonar.links.issue", "https://github.com/trellis-ldp/camel-ldp/issues"
         property "sonar.links.scm_dev", "scm:git:git@github.com:trellis-ldp/camel-ldp.git"
+        property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
     }
 }
 
