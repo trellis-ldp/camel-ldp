@@ -4,6 +4,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/trellis-ldp/camel-ldp/badge.svg?branch=master)](https://coveralls.io/github/trellis-ldp/camel-ldp?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.trellisldp/camel-ldp/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.trellisldp/camel-ldp/)
 
-LDP-related utilities for working with [Apache Camel](https://camel.apache.org).
+LDP-related utilities for working with [Apache Camel 3.x](https://camel.apache.org).
 
 
