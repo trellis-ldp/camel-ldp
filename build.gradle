@@ -1,5 +1,5 @@
 plugins {
-    id 'biz.aQute.bnd.builder' version '4.1.0'
+    id 'biz.aQute.bnd.builder' version '5.0.0'
     id 'com.github.ben-manes.versions' version '0.27.0'
     id 'com.github.hierynomus.license' version '0.15.0'
     id 'com.github.kt3k.coveralls' version '2.9.0'
