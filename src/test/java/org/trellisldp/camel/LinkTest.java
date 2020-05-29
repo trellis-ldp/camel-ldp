@@ -24,10 +24,10 @@ import org.junit.runner.RunWith;
  * @author acoburn
  */
 @RunWith(JUnitPlatform.class)
-public class LinkTest {
+class LinkTest {
 
     @Test
-    public void testLinkWithParams() {
+    void testLinkWithParams() {
         final Link link = new Link("<http://www.w3.org/ns/ldp#Container>; rel=\"type\";" +
                 "title=\"some title\"; type=\"text/turtle\"; other=\"param\"");
         assertEquals("http://www.w3.org/ns/ldp#Container", link.getUri());
@@ -39,7 +39,7 @@ public class LinkTest {
     }
 
     @Test
-    public void testLinkRelQuotes() {
+    void testLinkRelQuotes() {
         final Link link = new Link("<http://www.w3.org/ns/ldp#Container>; rel=\"type\"");
         assertEquals("http://www.w3.org/ns/ldp#Container", link.getUri());
         assertEquals("type", link.getRel());
@@ -49,7 +49,7 @@ public class LinkTest {
     }
 
     @Test
-    public void testLinkRelBadQuotes() {
+    void testLinkRelBadQuotes() {
         final Link link = new Link("<http://www.w3.org/ns/ldp#Container>; rel=\"type");
         assertEquals("http://www.w3.org/ns/ldp#Container", link.getUri());
         assertEquals("\"type", link.getRel());
@@ -59,7 +59,7 @@ public class LinkTest {
     }
 
     @Test
-    public void testLinkRelNoQuotes() {
+    void testLinkRelNoQuotes() {
         final Link link = new Link("<http://www.w3.org/ns/ldp#Container>;rel=type");
         assertEquals("http://www.w3.org/ns/ldp#Container", link.getUri());
         assertEquals("type", link.getRel());
@@ -69,25 +69,25 @@ public class LinkTest {
     }
 
     @Test
-    public void testNoURI() {
+    void testNoURI() {
         final Link link = new Link("");
         assertNull(link.getUri());
     }
 
     @Test
-    public void testBadURI() {
+    void testBadURI() {
         final Link link = new Link("<blah");
         assertNull(link.getUri());
     }
 
     @Test
-    public void testBadParam() {
+    void testBadParam() {
         final Link link = new Link("<uri>; rel");
         assertNull(link.getRel());
     }
 
     @Test
-    public void testMultipleParams() {
+    void testMultipleParams() {
         final Link link = new Link("<uri>; rel=one; rel=two; rel=three");
         assertEquals("one", link.getRel());
     }
