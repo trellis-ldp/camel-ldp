@@ -38,7 +38,7 @@ import org.junit.jupiter.api.Test;
 /**
  * @author acoburn
  */
-public class ActivityStreamProcessorTest extends CamelTestSupport {
+class ActivityStreamProcessorTest extends CamelTestSupport {
 
     private static final String PROV_ACTIVITY = "http://www.w3.org/ns/prov#Activity";
 
@@ -53,7 +53,7 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
     private ProducerTemplate template;
 
     @Test
-    public void testActivityStreamProcessor() throws IOException, InterruptedException {
+    void testActivityStreamProcessor() throws IOException, InterruptedException {
 
         final String id = "unique-identifier";
         final String resource = "http://localhost/repository/resource";
@@ -92,7 +92,7 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
     }
 
     @Test
-    public void testActivityStreamProcessorMissingSomeValues() throws IOException, InterruptedException {
+    void testActivityStreamProcessorMissingSomeValues() throws IOException, InterruptedException {
 
         final String id = "unique-id";
 
@@ -119,7 +119,7 @@ public class ActivityStreamProcessorTest extends CamelTestSupport {
     }
 
     @Test
-    public void testActivityStreamProcessorMissingAllValues() throws IOException, InterruptedException {
+    void testActivityStreamProcessorMissingAllValues() throws IOException, InterruptedException {
 
         final Map<String, Object> data = new HashMap<>();
         template.sendBody("direct:start", data);
