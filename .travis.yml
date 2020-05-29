@@ -22,6 +22,16 @@ stages:
   - test
   - deploy
 
+branches:
+  only:
+    - master
+    # release tags
+    - /^camel-ldp-\d+\.\d+\.\d+$/
+    # maintenance branches
+    - /^camel-ldp-\d+\.\d+\.x$/
+    # long-lived branches
+    - /branch-.+/
+
 env:
     - JOB=check
 
