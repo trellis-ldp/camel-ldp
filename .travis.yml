@@ -3,10 +3,6 @@ sudo: false
 dist: trusty
 group: edge
 
-addons:
-  sonarcloud:
-    organization: trellis-ldp
-
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
@@ -47,7 +43,7 @@ jobs:
           stage: test
           jdk: openjdk8
           script: ./gradlew check install jacocoTestReport --scan
-          after_success: ./gradlew coveralls sonarqube
+          after_success: ./gradlew coveralls
 
         # JDK 11
         - name: "Java 11"
