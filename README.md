@@ -1,8 +1,8 @@
 # camel-ldp
 
 [![Build Status](https://travis-ci.com/trellis-ldp/camel-ldp.svg?branch=main)](https://travis-ci.com/trellis-ldp/camel-ldp)
-[![Coverage Status](https://coveralls.io/repos/github/trellis-ldp/camel-ldp/badge.svg?branch=main)](https://coveralls.io/github/trellis-ldp/camel-ldp?branch=main)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.trellisldp/camel-ldp/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.trellisldp/camel-ldp/)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.trellisldp%3Acamel-ldp&metric=coverage)](https://sonarcloud.io/dashboard?id=org.trellisldp%3Acamel-ldp)
+![Maven Central](https://img.shields.io/maven-central/v/org.trellisldp/camel-ldp.svg)
 
 LDP-related utilities for working with [Apache Camel 3.x](https://camel.apache.org).
 

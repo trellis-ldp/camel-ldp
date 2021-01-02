@@ -20,6 +20,11 @@
     <property name="fileExtensions" value="java,css,js,xml"/>
   </module>
 
+  <!-- Checks for long lines. -->
+  <module name="LineLength">
+    <property name="max" value="120"/>
+  </module>
+
   <!-- Check that every module has a package-info.java file. -->
   <module name="JavadocPackage"/>
 
@@ -62,11 +67,6 @@
 
     <!-- Check that finds import statements that use the * notation. -->
     <module name="AvoidStarImport"/>
-    <!-- Checks for long lines. -->
-
-    <module name="LineLength">
-      <property name="max" value="120"/>
-    </module>
 
     <!-- Javadoc Checks -->
     <module name="JavadocParagraph"/>
@@ -80,7 +80,6 @@
 
     <module name="JavadocMethod">
       <property name="scope" value="public"/>
-      <property name="allowUndeclaredRTE" value="true"/>
     </module>
 
     <module name="JavadocStyle">
